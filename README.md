@@ -68,5 +68,21 @@ Parcel does what all things (Parcel is a bundler)
 12)Manages the port number
 13)Consistent hashing algorithm
 14)Zero Config
+15)Tree Shaking(removing unwanted code)
 
 Transitive Dependency: One dependency depends on one and that depends on another and so on.
+..............................................................................................................
+
+Chapter 3 Laying the Foundation
+
+●Babel -
+Converts the New Code into old code that they support (polyfills)
+Converts JSX code into React elements
+
+●Keys - are used for dom manupulation only newly added keys are manupulated
+
+●Component Composition - Using one component inside other
+
+●JSX (Functional and Class Components and Elements in JSX)
+
+...........................................................................................................
