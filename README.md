@@ -31,7 +31,7 @@ References: -
 https://beta.reactjs.org/apis/react/createElement -  
 https://www.youtube.com/watch?v=IrHmpdORLu8
 
-.......................................................................................................
+................................................................................................................................................
 
 Chapter 2:
 1)Setup our own React Create App
@@ -71,7 +71,7 @@ Parcel does what all things (Parcel is a bundler)
 15)Tree Shaking(removing unwanted code)
 
 Transitive Dependency: One dependency depends on one and that depends on another and so on.
-..............................................................................................................
+................................................................................................................................................
 
 Chapter 3 Laying the Foundation
 
@@ -85,4 +85,27 @@ Converts JSX code into React elements
 
 ●JSX (Functional and Class Components and Elements in JSX)
 
-...........................................................................................................
+................................................................................................................................................
+
+Chapter 4 Talk is Chaep Show me the Code
+
+● About JSX
+1)JSX can only have one Parent.
+
+● React Fragment
+1)It is like an empty divs (React.Fragment or <> </>)
+
+● Config Driven UI - site works as per the data passed to it
+
+● Props - Data or properties that we pass in our component
+Whenever w pass any data to the functional component it is passed as prop
+
+● Virtual Dom
+Used for reconciliation algorithm - to diff one tree from other
+It does not rerender whole tree just render the diff
+When we use unique Keys - react will get to know the new element added in dom
+
+● React Fibre
+React Fiber is a new reconciliation algorithm in React that improves the performance of the rendering process and user interactions
+
+................................................................................................................................................
