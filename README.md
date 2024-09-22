@@ -53,47 +53,60 @@ To create a new React app, follow these steps:
   npm init
   ```
 - Install Parcel as a development dependency:
+
+  ```bash
   npm install -D parcel
+  ```
 
 - Install React and ReactDOM:
+
+  ```bash
   npm i react
   npm i react-dom
+  ```
 
 - Start your project with Parcel:
+
+  ```bash
   npx parcel index.html
+  ```
 
 - Import React and React Dom
   import React from "react";
   import ReactDOM from "react-dom/client";
 
-- Add type as module in index.html <script type="module" src="app.js"></script>
-- For creating production build using : npx parcel build index.html
+# Project Setup and Important Notes
 
-Important points for package.lock.json
-1)It gives the exact version used (It locks the version)
-2)Never add it in gitignore
-3)sha integrity keeps the exact version on production that was present in our system
+- Add type as module in `index.html`:
+  `<script type="module" src="app.js"></script>`
+- For creating a production build, use:
+  `npx parcel build index.html`
 
-Parcel does what all things (Parcel is a bundler)
-1)Use File Watching algorithm
-2)Hot Module Replacement
-3)Bundling
-4)Minification
-5)Cleaning our code
-6)Dev and Production Build
-7)Super fast build algorithm
-8)Image optimization
-9)Caching while development
-10)Compression
-11)Compatible with other version of browsers by adding polyfills
-12)Manages the port number
-13)Consistent hashing algorithm
-14)Zero Config
-15)Tree Shaking(removing unwanted code)
+**Important points for `package-lock.json`**
 
-Transitive Dependency: One dependency depends on one and that depends on another and so on.
+1. It gives the exact version used (it locks the version).
+2. Never add it to `.gitignore`.
+3. SHA integrity keeps the exact version in production that was present in our system.
 
-**Please Note:** Write the answers and code on your own while completing your assignments. This practice will help you develop muscle memory and reinforce your understanding of concepts. ✌
+**Parcel does all these things (Parcel is a bundler):**
+
+1. Uses File Watching algorithm
+2. Hot Module Replacement
+3. Bundling
+4. Minification
+5. Cleaning our code
+6. Development and Production Builds
+7. Super fast build algorithm
+8. Image optimization
+9. Caching during development
+10. Compression
+11. Compatible with other browser versions by adding polyfills
+12. Manages the port number
+13. Consistent hashing algorithm
+14. Zero Configuration
+15. Tree Shaking (removing unwanted code)
+
+**Transitive Dependency:** One dependency depends on another, which depends on another, and so on.
 
 ### Theory Assignment:
 
@@ -273,18 +286,24 @@ Transitive Dependency: One dependency depends on one and that depends on another
 - **Default Import and Named Import:** When we have 2 components in the same js file then can export one by default and other by named import by just adding export in front of named one.
 
 - **Named Import:**
+
+  ```javascript
   export const Title = () => {
-  return <h1>This is the Title</h1>;
+    return <h1>This is the Title</h1>;
   };
-  import { Title as PageTitle } from './components/Title';
+  import { Title as PageTitle } from "./components/Title";
+  ```
 
 - **Default Import:**
+
+  ```javascript
   // Title.js
   const Title = () => {
-  return <h1>This is the Title</h1>;
+    return <h1>This is the Title</h1>;
   };
 
-export default Title;
+  export default Title;
+  ```
 
 - **React Uses one way Data Binding:**
 
@@ -294,3 +313,87 @@ export default Title;
   - We get useState from React
   - useState return an array [variable name, function to update the variable]
   - const [searchText, setSearchText] = useState("KFC"); // To create state variable
+
+### Assignment
+
+- What is the difference between Named Export, Default export, and \* as export?
+- What is the importance of the `config.js` file?
+- What are React Hooks?
+- Why do we need the `useState` Hook?
+
+### Coding Assignment:
+
+- Clean up your code.
+- Create a folder structure for your app.
+- Make different files for each component.
+- Create a config file.
+- Use all types of import and export.
+- Create a search box in your app.
+- Use `useState` to create a variable and bind it to the input box.
+- Try to make your search bar work.
+
+### References
+
+- Code Link: [https://bitbucket.org/namastedev/namaste-react-live/src/master/](https://bitbucket.org/namastedev/namaste-react-live/src/master/)
+
+---
+
+# Chapter 08 - Exploring the World
+
+### **useEffect:**
+
+The `useEffect` hook in React is a powerful feature that allows you to perform side effects in functional components.
+
+1. **Runs Once on Render:** It is called only once when the page renders, making it an ideal place to call APIs.
+2. **Side Effects:** You can perform operations such as data fetching, setting up subscriptions, or directly manipulating the DOM after rendering.
+
+```javascript
+useEffect(() => {
+  // Your effect code here
+
+  return () => {
+    // Cleanup code here (optional)
+  };
+}, [dependencies]);
+
+
+# Dependency Array
+
+The second argument to useEffect is an array of dependencies. This tells React when to run the effect:
+
+3) If you provide an empty array ([]), the effect runs only once after the initial render (similar to componentDidMount).
+If you include variables in the array, the effect runs whenever those variables change (similar to componentDidUpdate).
+
+4) Cleanup Function: You can return a cleanup function from your effect. This is useful for cleaning up subscriptions or timers to avoid memory leaks. The cleanup function runs before the component unmounts or before the effect runs again.
+
+### When to Use useEffect
+- Fetching Data: When you need to fetch data after the component mounts.
+- Subscribing to Events: When you need to set up subscriptions (e.g., WebSocket, event listeners).
+- Updating the DOM: When you need to manually manipulate the DOM after rendering.
+- Timers: When you need to set intervals or timeouts.
+
+
+# Chapter 08 - Exploring the world
+- What is a Microservice?
+- What is Monolith architecture?
+- What is the difference between Monolith and Microservice?
+- Why do we need a useEffect Hook?
+- What is Optional Chaining?
+- What is Shimmer UI?
+- What is the difference between JS expression and JS statement?
+- What is Conditional Rendering, explain with a code example?
+- What is CORS?
+- What is async and await?
+- What is the use of `const json = await data.json();` in getRestaurants()?
+
+### Coding Assignment:
+- Play with the useEffect Hook to see when it is called? (before or after render)
+- Play with dependency array in useEffect Hook
+- Play with the developer console by putting a debugger in render and useEffect
+- Call an actual API to get data
+- Handle Error in your API call
+- Build Shimmer UI when data is not loaded
+- Render your UI with actual API data
+- Make Search functionality work
+- Make a Login Logout button which toggles with a state
+```

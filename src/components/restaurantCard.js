@@ -1,21 +1,19 @@
 import { IMG_CONST_LINK } from "../constants";
 
 const RestrauntCard = ({
-    name,
-    cuisines,
-    cloudinaryImageId,
-    lastMileTravelString,
+    description,
+    entityType,
+    imageId,
   }) => {
     return (
       <div className="card">
         <img
           src={
-            IMG_CONST_LINK + cloudinaryImageId
+            IMG_CONST_LINK + imageId
           }
         />
-        <h2>{name}</h2>
-        <h3>{cuisines.join(", ")}</h3>
-        <h4>{lastMileTravelString} minutes</h4>
+        <h2>{description}</h2>
+        <h3>{entityType}</h3>
       </div>
     );
 };
