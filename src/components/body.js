@@ -75,8 +75,8 @@ const Body = () => {
         {/* You have to write logic for NO restraunt fount here */}
         {filteredRestaurants.map((restaurant) => {
           return (
-            <Link to={"/restaurant/" + restaurant.id}>
-              <RestaurantCard {...restaurant} key={restaurant.id} />
+            <Link to={"/restaurant/" + restaurant.id} key={restaurant.id}>
+              <RestaurantCard {...restaurant} />
             </Link>
           );
         })}

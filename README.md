@@ -536,3 +536,221 @@ Id that is passed from here:
 path: "/restaurant/:id",
 element: <RestaurantMenu />,
 },
+
+# Assignment
+
+## Theory Questions
+
+1. What are various ways to add images into our App? Explain with code examples.
+2. What would happen if we do `console.log(useState())`?
+3. How will `useEffect` behave if we don't add a dependency array?
+4. What is SPA (Single Page Application)?
+5. What is the difference between Client-Side Routing and Server-Side Routing?
+
+## Coding Assignment
+
+1. Add Shimmer Effect without installing a library.
+2. Install `react-router-dom`.
+3. Create an `appRouter` and provide it to the app.
+4. Create a Home, About, and Contact page with Link (use child routes).
+5. Make an Error page for routing errors.
+6. Create a Restaurant Page with dynamic restaurant ID.
+7. (Extra) Create a login page using Formik Library.
+
+## Resources
+
+- **React Router DOM**: [React Router Documentation](https://reactrouter.com/en/main/start/overview)
+- **Client-Side Routing**: [Client-Side Routing Explanation](https://reactrouter.com/en/main)
+- **Formik**: [Formik Documentation](https://formik.org/)
+
+---
+
+# Chapter 10 - Lets get Classy
+
+- To create a class based component create a class and extend it from React.Component
+- To use the inputs passed from the parent use this.props.name and in functional component we write props.name by passing props in function.
+- Write everything inside render method for class based component.
+
+```javascript
+import React from "react";
+
+class Profile extends React.Component {
+  render() {
+    return (
+      <div>
+        <h1>Class based components</h1>
+        <h2>Name: {this.props.name}</h2>
+      </div>
+    );
+  }
+}
+
+export default Profile;
+```
+
+### **States in Class based Component**
+
+### **Super Keyword in React**
+
+In React class-based components, super(props) is used because you're extending a base class (in this case, React.Component), and it's necessary to call the constructor of the parent class (super()) before you can access this in your derived class.
+
+### **Lifecycle Hooks**
+
+1)componentDidMount
+Called after render is called. First constructor, then render and after that componentDidMount is called.
+Best place to make API Calls.
+
+2)componentDidUpdate
+It is called when component is rerendered after api call.
+
+3)componentWillUnmount
+It is called when the component is destroyed.
+
+Calling a API In component
+1)Create this.state = {}
+2)Inside componentDidMount write the logic of fetch api call.
+3)Then use this.state.object.param inside the render html.
+
+```javascript
+import React from "react";
+
+class Profile extends React.Component {
+  constructor(props) {
+    super(props);
+    //Create State
+    this.state = {
+      userInfo: {
+        login: "dummyName",
+        type: "India",
+      },
+    };
+  }
+
+  async componentDidMount() {
+    const data = await fetch("https://api.github.com/users/Vaishali-123Sharma");
+    const json = await data.json();
+    console.log(json);
+    this.setState({
+      userInfo: json,
+    });
+  }
+
+  render() {
+    const { count } = this.state;
+    return (
+      <div>
+        <h1>Class based components</h1>
+        <img src={this.state.userInfo.avatar_url}></img>
+        <h2>Name: {this.state.userInfo.login}</h2>
+        <h2>Name: {this.state.userInfo.type}</h2>
+        <button
+          onClick={() => {
+            this.setState({
+              count: 1,
+            });
+          }}
+        >
+          Set Count
+        </button>
+        <h2>Count: {count}</h2>
+      </div>
+    );
+  }
+}
+export default Profile;
+```
+
+### **Unmounting in Function Based Component**
+
+To unmount a component in Functional component , write it inside return from useEffect.
+
+The order of Life Cycle Hooks are:
+/\*\*
+
+-
+- Parent Constructor
+- Parent render
+- First Child constructor
+- First Child render
+- Second Child constructor
+- Second Child render
+-
+- DOM UPDATED for children
+-
+- first Child componentDidMount
+- Second Child componentDid
+- Parent componentDidMount
+-
+- \*/
+
+1. **How do you create Nested Routes with react-router-dom configuration?**
+
+   - Nested routes can be created in `react-router-dom` by using the `<Route>` component inside another `<Route>` component. This allows you to render child components within a parent route. The parent route serves as a wrapper, and the child routes can be rendered in specific areas using the `<Outlet>` component.
+
+2. **Read about `createHashRouter` and `createMemoryRouter` from React Router docs.**
+
+   - `createHashRouter`: This router is used for applications where the browser's URL uses the hash portion (`#`) to keep track of the current location. This is especially useful for older browsers or static file servers.
+   - `createMemoryRouter`: This router keeps the history of routes in memory (no actual URL changes). It’s useful for testing, or for applications where URL changes aren’t necessary (like React Native or Electron apps).
+
+3. **What is the order of lifecycle method calls in Class-Based Components?**
+
+   - The lifecycle methods in class-based components are called in the following order:
+     1. **Mounting**: `constructor()`, `static getDerivedStateFromProps()`, `render()`, `componentDidMount()`
+     2. **Updating (state or props change)**: `static getDerivedStateFromProps()`, `shouldComponentUpdate()`, `render()`, `getSnapshotBeforeUpdate()`, `componentDidUpdate()`
+     3. **Unmounting**: `componentWillUnmount()`
+
+4. **Why do we use `componentDidMount`?**
+
+   - `componentDidMount` is used to perform side effects after the component has been mounted into the DOM. Common use cases include fetching data from APIs, subscribing to events, or setting up timers.
+
+5. **Why do we use `componentWillUnmount`? Show with an example.**
+
+   - `componentWillUnmount` is used for cleanup tasks before a component is removed from the DOM. Common uses include clearing intervals, canceling network requests, or unsubscribing from events.
+
+   ```js
+   class Timer extends React.Component {
+     componentDidMount() {
+       this.timerID = setInterval(() => {
+         console.log("Tick");
+       }, 1000);
+     }
+
+     componentWillUnmount() {
+       clearInterval(this.timerID); // Clear the interval when the component unmounts
+     }
+
+     render() {
+       return <div>Timer Running</div>;
+     }
+   }
+   ```
+
+## Theory Assignment
+
+1. How do you create Nested Routes react-router-dom configuration?
+2. Read about `createHashRouter`, `createMemoryRouter` from React Router docs.
+3. What is the order of life cycle method calls in Class Based Components?
+4. Why do we use `componentDidMount`?
+5. Why do we use `componentWillUnmount`? Show with an example.
+6. (Research) Why do we use `super(props)` in the constructor?
+7. (Research) Why can't we have the callback function of `useEffect` as async?
+
+## Coding Assignment
+
+1. Create a Class Based Component.
+2. Create 2 class-based child components.
+3. Pass props from Parent to child.
+4. Create a constructor.
+5. Create a state variable inside the child component.
+6. Use `this.setState` to update it.
+7. What if there are multiple state variables?
+8. Write a `console.log` for each lifecycle method.
+9. Play with the console logs to find out the correct order of their execution.
+10. Create an interval inside `componentDidMount`.
+11. Use `clearInterval` to fix the issue caused by that interval.
+12. **React Life Cycle Method Diagram**: Refer to the link below:
+    - [React Life Cycle Methods Diagram](https://projects.wojtekmaj.pl/react-lifecycle-methods-diagram/)
+13. **Code Link**:
+    - [Namaste React Live](https://bitbucket.org/namastedev/namaste-react-live/src/master/)
+
+---
