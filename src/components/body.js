@@ -2,6 +2,7 @@ import { restrautList } from "../constants";
 import RestaurantCard from "./RestaurantCard";
 import { useState, useEffect } from "react";
 import Shimmer from "./shimmer";
+import { Link } from "react-router-dom";
 
 function filterData(searchText, restaurants) {
   // 8 restraunt list = > filtered  rest with "King"
@@ -29,7 +30,7 @@ const Body = () => {
       "https://www.swiggy.com/dapi/restaurants/list/v5?lat=12.9351929&lng=77.62448069999999&page_type=DESKTOP_WEB_LISTING"
     );
     const json = await data.json();
-    
+
     // Optional Chaining
     console.log(json?.data?.cards[0].card.card.imageGridCards);
     setAllRestaurants(json?.data?.cards[0].card.card.imageGridCards.info);
@@ -74,7 +75,9 @@ const Body = () => {
         {/* You have to write logic for NO restraunt fount here */}
         {filteredRestaurants.map((restaurant) => {
           return (
-            <RestaurantCard {...restaurant} key={restaurant.id} />
+            <Link to={"/restaurant/" + restaurant.id}>
+              <RestaurantCard {...restaurant} key={restaurant.id} />
+            </Link>
           );
         })}
       </div>

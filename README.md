@@ -355,25 +355,26 @@ useEffect(() => {
     // Cleanup code here (optional)
   };
 }, [dependencies]);
-
+```
 
 # Dependency Array
 
 The second argument to useEffect is an array of dependencies. This tells React when to run the effect:
 
-3) If you provide an empty array ([]), the effect runs only once after the initial render (similar to componentDidMount).
-If you include variables in the array, the effect runs whenever those variables change (similar to componentDidUpdate).
+3. If you provide an empty array ([]), the effect runs only once after the initial render (similar to componentDidMount).
+   If you include variables in the array, the effect runs whenever those variables change (similar to componentDidUpdate).
 
-4) Cleanup Function: You can return a cleanup function from your effect. This is useful for cleaning up subscriptions or timers to avoid memory leaks. The cleanup function runs before the component unmounts or before the effect runs again.
+4. Cleanup Function: You can return a cleanup function from your effect. This is useful for cleaning up subscriptions or timers to avoid memory leaks. The cleanup function runs before the component unmounts or before the effect runs again.
 
 ### When to Use useEffect
+
 - Fetching Data: When you need to fetch data after the component mounts.
 - Subscribing to Events: When you need to set up subscriptions (e.g., WebSocket, event listeners).
 - Updating the DOM: When you need to manually manipulate the DOM after rendering.
 - Timers: When you need to set intervals or timeouts.
 
-
 # Chapter 08 - Exploring the world
+
 - What is a Microservice?
 - What is Monolith architecture?
 - What is the difference between Monolith and Microservice?
@@ -387,6 +388,7 @@ If you include variables in the array, the effect runs whenever those variables 
 - What is the use of `const json = await data.json();` in getRestaurants()?
 
 ### Coding Assignment:
+
 - Play with the useEffect Hook to see when it is called? (before or after render)
 - Play with dependency array in useEffect Hook
 - Play with the developer console by putting a debugger in render and useEffect
@@ -396,4 +398,141 @@ If you include variables in the array, the effect runs whenever those variables 
 - Render your UI with actual API data
 - Make Search functionality work
 - Make a Login Logout button which toggles with a state
+
+---
+
+# Chapter 09 - Finding the path
+
+- Never write useEffect inside for loop.
+- Never create useState outside function component
+
+### **Install React Router Dom:**
+
+```javascript
+npm  i react-router-dom
 ```
+
+### **Create a new component About Us:**
+
+### \*_Inside App.js import these:_
+
+```javascript
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+
+const appRouter = createBrowserRouter([
+  {
+    path: "/",
+    element: <AppLayout />,
+  },
+  {
+    path: "/about",
+    element: <About />,
+  },
+]);
+
+root.render(<RouterProvider router={appRouter} />);
+```
+
+### **For creating error Page:**
+
+```javascript
+const appRouter = createBrowserRouter([
+  {
+    path: "/",
+    element: <AppLayout />,
+    errorElement: <Error />,
+  },
+  {
+    path: "/about",
+    element: <About />,
+  },
+]);
+```
+
+In the Error.js file to show proper error messages
+
+```javascript
+import { useRouteError } from "react-router-dom";
+
+const Error = () => {
+  const err = useRouteError();
+  return (
+    <div>
+      <h1>OOPS!</h1>
+      <h1>{err.status + " " + err.statusText}</h1>
+    </div>
+  );
+};
+
+export default Error;
+```
+
+### **Route to other pages using outlet:**
+
+In the children write all the components that needs to be shown between Header and Footer.
+
+```javascript
+import { createBrowserRouter, Outlet, RouterProvider } from "react-router-dom";
+
+const AppLayout = () => {
+  return (
+    <>
+      <Header />
+      <Outlet />
+      <Footer />
+    </>
+  );
+};
+const appRouter = createBrowserRouter([
+  {
+    path: "/",
+    element: <AppLayout />,
+    errorElement: <Error />,
+    children: [
+      {
+        path: "/",
+        element: <Body />,
+      },
+      {
+        path: "/about",
+        element: <About />,
+      },
+      {
+        path: "/contact",
+        element: <Contact />,
+      },
+    ],
+  },
+]);
+```
+
+### **Dyanamic Route in React:**
+
+For fetching dyanamic Ids in route use useParams hook of react
+Whatever params is passed in url from the link it give us in component.
+
+Restaurant Card receives the Id
+
+```javascript
+import { useParams } from "react-router-dom";
+
+const RestaurantMenu = () => {
+  const { id } = useParams();
+
+  console.log({ id });
+  return (
+    <div>
+      <h1>Restaurant Id : {id}</h1>
+      <h2>Restaurant Name</h2>
+    </div>
+  );
+};
+
+export default RestaurantMenu;
+```
+
+Id that is passed from here:
+{
+path: "/restaurant/:id",
+element: <RestaurantMenu />,
+},
