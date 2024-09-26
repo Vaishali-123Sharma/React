@@ -3,15 +3,8 @@ import RestaurantCard from "./RestaurantCard";
 import { useState, useEffect } from "react";
 import Shimmer from "./shimmer";
 import { Link } from "react-router-dom";
-
-function filterData(searchText, restaurants) {
-  // 8 restraunt list = > filtered  rest with "King"
-  const filterData = restaurants.filter((restaurant) =>
-    restaurant?.description?.toLowerCase()?.includes(searchText.toLowerCase())
-  );
-
-  return filterData;
-}
+import { filterData } from "../utils/helper";
+import useOnline from "../utils/useOnline";
 
 const Body = () => {
   const [allRestaurants, setAllRestaurants] = useState([]);
@@ -38,6 +31,11 @@ const Body = () => {
   }
 
   console.log("render");
+
+  const online = useOnline();
+  if (!online) {
+    return <h1>You are offline</h1>;
+  }
 
   // not render component (Early return)
   if (!allRestaurants) return null;

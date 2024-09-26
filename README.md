@@ -202,8 +202,6 @@ To create a new React app, follow these steps:
 
 ## Chapter 04 - Talk is Cheap, Show Me the Code
 
-# React Concepts
-
 ## About JSX
 
 - **JSX can only have one parent.**
@@ -373,7 +371,7 @@ The second argument to useEffect is an array of dependencies. This tells React w
 - Updating the DOM: When you need to manually manipulate the DOM after rendering.
 - Timers: When you need to set intervals or timeouts.
 
-# Chapter 08 - Exploring the world
+### Assignments:
 
 - What is a Microservice?
 - What is Monolith architecture?
@@ -754,3 +752,70 @@ The order of Life Cycle Hooks are:
     - [Namaste React Live](https://bitbucket.org/namastedev/namaste-react-live/src/master/)
 
 ---
+
+# Chapter 11 - Optimizing our App
+
+## Hooks in React
+
+Hooks are used to increasability of our code and returns some value not JSX.
+All the api codes and logic is exported from here.
+We use hook to export some logic into the function.
+
+## Using Hooks to create online offline application
+
+```js
+import { useEffect, useState } from "react";
+
+const useOnline = () => {
+  const [isOnline, setIsOnline] = useState(false);
+
+  useEffect(() => {
+    const handleOnline = () => {
+      setIsOnline(true);
+    };
+
+    const handleOffline = () => {
+      setIsOnline(false);
+    };
+
+    window.addEventListener("online", handleOnline);
+    window.addEventListener("offline", handleOffline);
+
+    return () => {
+      window.removeEventListener("online", handleOnline);
+      window.removeEventListener("offline", handleOffline);
+    };
+  }, []);
+
+  return isOnline;
+};
+export default useOnline;
+```
+
+## Dyanaic import in React (Lazy Import in place of normal import)
+
+Index.js will be created seperately and instmart.js will be created seperately.
+Instead of using:
+
+```js
+//Instead of normal import use dyanamic import
+import Instamart from "./components/instamart";
+//Use this
+const instamart = lazy(() => import("./components/instamart"));
+```
+
+As the lazy component will be loaded seperately with delay it will be dlayed.
+React will know by it by using Suspese as shown below.
+
+```js
+import React, { lazy, Suspense } from "react";
+// till the time lazy component is notu loaded it will show Shimmer
+ {
+    path: "/instamart",
+    element: (
+        <Suspense fallback={<Shimmer/>}>
+            <Instamart />
+        </Suspense>
+    ),
+},
+```
