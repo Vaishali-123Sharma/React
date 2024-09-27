@@ -819,3 +819,12 @@ import React, { lazy, Suspense } from "react";
     ),
 },
 ```
+
+---
+
+# Chapter 12 - Jo dikhta he wo bikata he
+
+Install Tailwind CSS with Parcel
+[Tailwind CSS Setup](https://tailwindcss.com/docs/guides/parcel)
+
+---

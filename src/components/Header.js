@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 export const Title = () => (
   <a href="/">
     <img
-      className="logo"
+      className="h-28 p-2"
       alt="logo"
       src="https://yt3.ggpht.com/ytc/AMLnZu_EC-ECXAxRAixWGEfMsE1rdSoetBHyxmLNdtCB=s900-c-k-c0x00ffffff-no-rj"
     />
@@ -12,23 +12,23 @@ export const Title = () => (
 
 const Header = () => {
   return (
-    <div className="header">
+    <div className="flex justify-between bg-pink-50 shadow-lg">
       <Title />
       <div className="nav-items">
-        <ul>
+        <ul className="flex py-10">
           <Link to="/">
-            <li>Home</li>
+            <li className="px-2">Home</li>
           </Link>
           <Link to="/about">
-            <li>About</li>
+            <li className="px-2">About</li>
           </Link>
           <Link to="/contact">
-            <li>Contact</li>
+            <li className="px-2">Contact</li>
           </Link>
           <Link to="/instamart">
-            <li>Instamart</li>
+            <li className="px-2">Instamart</li>
           </Link>
-          <li>Cart</li>
+          <li className="px-2">Cart</li>
         </ul>
       </div>
     </div>
