@@ -1,6 +1,7 @@
+import UserContext from "../utils/userContext";
 import Profile from "./ProfileClass";
-import ProfileFunctionalComponent from "./profile";
 import { Component } from "react";
+
 class About extends Component {
   constructor(props) {
     super(props);
@@ -16,6 +17,15 @@ class About extends Component {
     return (
       <div>
         <h1>About Us Page</h1>
+        <UserContext.Consumer>
+          {({ user }) => {
+            return (
+              <h4 className="font-bold">
+                This is {user.name}-{user.email}
+              </h4>
+            );
+          }}
+        </UserContext.Consumer>
         <p>This is a about us page</p>
         <Profile />
       </div>

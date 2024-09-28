@@ -1,16 +1,17 @@
 import { restrautList } from "../constants";
 import RestaurantCard from "./restaurantCard";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import Shimmer from "./shimmer";
 import { Link } from "react-router-dom";
 import { filterData } from "../utils/helper";
 import useOnline from "../utils/useOnline";
+import UserContext from "../utils/userContext";
 
 const Body = () => {
   const [allRestaurants, setAllRestaurants] = useState([]);
   const [filteredRestaurants, setFilteredRestaurants] = useState([]);
   const [searchText, setSearchText] = useState("");
-
+  const { user, setUser } = useContext(UserContext);
   // empty dependency array => once after render
   // dep arry [searchText] => once after initial render + everytime after redern (my searchText changes)
   useEffect(() => {
@@ -60,15 +61,34 @@ const Body = () => {
         <button
           className="p-2 m-2 bg-purple-900 hover:bg-gray-500 text-white rounded-md"
           onClick={() => {
-            //need to filter the data
             const data = filterData(searchText, allRestaurants);
-            // update the state - restaurants
             setFilteredRestaurants(data);
           }}
         >
           Search
         </button>
+        <input
+          className="p-2 m-2"
+          value={user.name}
+          onChange={(e) =>
+            setUser({
+              ...user,
+              name: e.target.value,
+            })
+          }
+        ></input>
+        <input
+          className="p-2 m-2"
+          value={user.email}
+          onChange={(e) =>
+            setUser({
+              ...user,
+              email: e.target.value,
+            })
+          }
+        ></input>
       </div>
+
       <div className="flex flex-wrap">
         {/* You have to write logic for NO restraunt fount here */}
         {filteredRestaurants.map((restaurant) => {

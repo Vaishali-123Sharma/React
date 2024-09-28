@@ -828,3 +828,72 @@ Install Tailwind CSS with Parcel
 [Tailwind CSS Setup](https://tailwindcss.com/docs/guides/parcel)
 
 ---
+
+# Chapter 13 - Data is the New Oil
+
+## Props Drilling
+
+passing props from one layer to another and drilling down for passing data.
+
+## Lifting the State UP
+
+Parent wil have control to show and hide the state of its children, child should not have seperate states.
+
+## React Context
+
+To manage state throughout the react application , same as redux.
+
+Create a context and call it inside useContext as shown below to use it through out the application.
+
+```js
+import UserContext from "../utils/useContext";
+import { useContext } from "react";
+
+const Footer = () => {
+  const { user } = useContext(UserContext);
+  return (
+    <div>
+      <span className="p-10 m-10 font-bold">
+        This site is developed by {user.name}-{user.email}
+      </span>
+    </div>
+  );
+};
+
+export default Footer;
+```
+
+In class based components use it like this
+
+```js
+import UserContext from "../utils/userContext";
+
+<UserContext.Consumer>
+  {({ user }) => {
+    return (
+      <h4 className="font-bold">
+        This is {user.name}-{user.email}
+      </h4>
+    );
+  }}
+</UserContext.Consumer>;
+```
+
+## Theory:
+
+1. **What is prop drilling?**
+2. **What is lifting the state up?**
+3. **What is Context Provider and Context Consumer?**
+4. **If you don’t pass a value to the provider, does it take the default value?**
+
+## Coding:
+
+- Practice React Context with code examples.
+- Try out Nested Contexts.
+
+## References:
+
+- [Lifting State Up](https://reactjs.org/docs/lifting-state-up.html)
+- [React Context](https://reactjs.org/docs/context.html)
+
+---
