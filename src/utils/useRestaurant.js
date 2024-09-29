@@ -12,7 +12,6 @@ const useRestaurant = (id) => {
     try {
       const data = await fetch(FETCH_MENU_URL + id);
       const json = await data.json();
-      console.log(json);
       setRestaurant(json?.data?.cards[0]?.card?.card);
     } catch (error) {
       console.error("Error fetching restaurant details:", error);

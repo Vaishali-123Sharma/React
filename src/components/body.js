@@ -21,17 +21,14 @@ const Body = () => {
 
   async function getRestaurants() {
     const data = await fetch(
-      "https://www.swiggy.com/dapi/restaurants/list/v5?lat=12.9351929&lng=77.62448069999999&page_type=DESKTOP_WEB_LISTING"
+      "https://www.swiggy.com/dapi/restaurants/list/v5?lat=21.99740&lng=79.00110&collection=83631"
+      //"https://www.swiggy.com/dapi/restaurants/list/v5?lat=12.9351929&lng=77.62448069999999&page_type=DESKTOP_WEB_LISTING"
     );
     const json = await data.json();
-
-    // Optional Chaining
-    console.log(json?.data?.cards[0].card.card.imageGridCards);
+    console.log(json);
     setAllRestaurants(json?.data?.cards[0].card.card.imageGridCards.info);
     setFilteredRestaurants(json?.data?.cards[0].card.card.imageGridCards.info);
   }
-
-  console.log("render");
 
   const online = useOnline();
   if (!online) {

@@ -733,3 +733,26 @@ export const restrautList = [
     subtype: "basic",
   },
 ];
+export const foodItems = [
+  {
+    id: 1,
+    name: "Scoops Fast Food And Ice Cream",
+    imageUrl:
+      "https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_660/faab7ff9ca06c3364743f61a562ee370",
+    description: "Delicious cheese pizza",
+  },
+  {
+    id: 2,
+    name: "Pizza Box",
+    imageUrl:
+      "https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_660/ewx0hlioxtlgavq0jqqf",
+    description: "Juicy beef burger with lettuce",
+  },
+  {
+    id: 3,
+    name: "Urban Cafe",
+    imageUrl:
+      "https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_660/RX_THUMBNAIL/IMAGES/VENDOR/2024/6/21/dbe91f1f-b400-4f4b-a78d-c6b99bdc61c5_912754.JPG",
+    description: "Creamy alfredo pasta",
+  },
+];

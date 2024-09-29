@@ -827,6 +827,24 @@ import React, { lazy, Suspense } from "react";
 Install Tailwind CSS with Parcel
 [Tailwind CSS Setup](https://tailwindcss.com/docs/guides/parcel)
 
+## Theory:
+
+1. **Explore all the ways of writing CSS.**
+2. **How do we configure Tailwind?**
+3. **In `tailwind.config.js`, what does all the keys mean (content, theme, extend, plugins)?**
+4. **Why do we have `.postcssrc` file?**
+
+## Coding:
+
+- Configure Tailwind and try to build your whole app using Tailwind.
+
+## References:
+
+- [Styled Components](https://styled-components.com/)
+- [Tailwind CSS](https://tailwindcss.com/)
+- [Bootstrap](https://getbootstrap.com/)
+- [Material UI](https://mui.com/)
+
 ---
 
 # Chapter 13 - Data is the New Oil
@@ -897,3 +915,144 @@ import UserContext from "../utils/userContext";
 - [React Context](https://reactjs.org/docs/context.html)
 
 ---
+
+# Chapter 14 - Let's Build our Store
+
+```js
+npm i @reduxjs/toolkit
+npm i react-redux
+```
+
+# Redux in React (Based on Namaste React)
+
+Redux is a **state management library** that is commonly used with React to handle the global state of an application. It provides a predictable way to manage state across large applications, making it easier to share data between components without prop-drilling.
+
+## Key Concepts in Redux
+
+### 1. State Management:
+
+Redux manages the state of your application by storing it in a **single JavaScript object** called the **store**. This central store allows any component to access the state without passing props down through multiple layers.
+
+### 2. Three Core Principles:
+
+Redux is based on three key principles that help make state management more predictable and structured:
+
+1. **Single Source of Truth:**
+   - The entire state of the application is stored in a single object, which lives inside the Redux store. This ensures that your app has one consistent version of the state.
+2. **State is Read-Only:**
+   - The state can only be updated by dispatching **actions**. This makes the state predictable and prevents components from accidentally modifying it.
+3. **Changes are Made with Pure Functions:**
+   - To update the state, Redux uses **reducers**, which are pure functions. A reducer takes the previous state and an action, and returns the next state. The reducer function ensures that the state updates in a predictable and testable way.
+
+## Redux Workflow
+
+The basic flow of data in Redux follows these steps:
+
+1. **Actions:**
+
+   - Actions are plain JavaScript objects that describe the intention to change the state. An action must have a `type` property, which defines the type of action being performed.
+
+   ```javascript
+   const addItem = {
+     type: "ADD_ITEM",
+     payload: {
+       id: 1,
+       name: "Apple",
+     },
+   };
+   ```
+
+2. **Reducers:**
+
+- A reducer is a pure function that takes the current state and an action, and returns a new state. Reducers define how the state changes in response to the actions.
+
+```javascript
+const initialState = {
+  items: [],
+};
+
+const cartReducer = (state = initialState, action) => {
+  switch (action.type) {
+    case "ADD_ITEM":
+      return {
+        ...state,
+        items: [...state.items, action.payload],
+      };
+    default:
+      return state;
+  }
+};
+```
+
+3. **Store:**
+
+- The Redux store holds the entire state of the application. It is created using the createStore function and is responsible for allowing access to the state, dispatching actions, and registering listeners.
+
+```javascript
+import { createStore } from "redux";
+const store = createStore(cartReducer);
+```
+
+4. **Dispatch:**
+
+- To change the state, you dispatch an action to the store using store.dispatch()
+
+```javascript
+store.dispatch({
+  type: "ADD_ITEM",
+  payload: { id: 2, name: "Banana" },
+});
+```
+
+# Connecting Redux to React
+
+## `react-redux`
+
+To connect Redux with React, we use the **`react-redux`** library, which provides tools to easily integrate Redux into React components. Here are the key utilities:
+
+### 1. `Provider`
+
+`Provider` is a component that wraps your entire application and makes the Redux store available to all components within your app. Without it, the components cannot access the store.
+
+```javascript
+import { Provider } from "react-redux";
+import { store } from "./store"; // Your Redux store
+
+const App = () => (
+  <Provider store={store}>
+    <YourComponent />
+  </Provider>
+);
+```
+
+### 2. `useSelector`
+
+`useSelector` is a hook that allows you to extract data from the Redux store's state. You pass a function to useSelector that receives the entire state and returns the part of the state your component needs.
+
+```javascript
+import { useSelector } from "react-redux";
+
+const Cart = () => {
+  const items = useSelector((state) => state.items); // Accessing items from the Redux store
+  return <div>{items.length} items in cart</div>;
+};
+```
+
+### 3. `useDispatch`
+
+`useDispatch` is a hook that allows you to dispatch actions to the Redux store from within your React components. This hook gives access to the dispatch function to trigger state changes.
+
+```javascript
+import { useDispatch } from "react-redux";
+
+const AddItemButton = () => {
+  const dispatch = useDispatch();
+  const addItem = () => {
+    dispatch({
+      type: "ADD_ITEM",
+      payload: { id: 3, name: "Grapes" },
+    });
+  };
+  return <button onClick={addItem}>Add Item</button>;
+};
+```

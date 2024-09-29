@@ -20,7 +20,7 @@ const useOnline = () => {
       window.removeEventListener("offline", handleOffline);
     };
   }, []);
-  console.log(isOnline);
+
   return isOnline;
 };
 export default useOnline;
