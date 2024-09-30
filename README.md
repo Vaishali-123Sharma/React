@@ -1056,3 +1056,105 @@ const AddItemButton = () => {
   return <button onClick={addItem}>Add Item</button>;
 };
 ```
+
+---
+
+# Chapter 15 - Time for the test
+
+### React Testing Library
+
+React Testing Library builds on top of DOM Testing Library by adding APIs for working with React components.
+
+1)Install React testing liabrary
+
+```javascript
+npm i -D jest
+npm install --save-dev @testing-library/react @testing-library/dom
+```
+
+2)Configure Jest
+
+```javascript
+//npx because we want it only once, npm is for everytime
+npx jest --init
+```
+
+3)Install jest environment js dom
+
+```javascript
+npm i -D jest-environment-jsdom
+```
+
+4)Create my first test File
+
+```javascript
+//Sum.test.js
+import { sum } from "../sum";
+
+test("Check Sum of two numbers", () => {
+  expect(sum(2, 5)).toBe(5);
+});
+
+//Sum.js
+export const sum = (a, b) => a + b;
+```
+
+5)Configure Jest with Babel
+
+```javascript
+npm install --save-dev babel-jest @babel/core @babel/preset-env
+```
+
+6)Configure Babel by adding this in .babelrc
+
+```javascript
+{
+    "presets": [["@babel/preset-env", {"targets": {"node": "current"}}]]
+}
+```
+
+7)Write your test cases.
+8)Add coverage inside gitignore
+
+9)Install Babel prset react so that the testing liabrary understand JSX
+
+```javascript
+npm i -D @babel/preset-react
+```
+
+10)Configure .babelrc for Preset React
+
+```javascript
+{
+    "presets": [
+        ["@babel/preset-env", {"targets": {"node": "current"}}],
+        ["@babel/preset-react",{"runtime":"automatic"}]
+    ]
+}
+```
+
+11)Add Provider and store in the Header test case for jest to understand
+
+```javascript
+import Header from "../Header";
+import { render } from "@testing-library/react";
+import { Provider } from "react-redux";
+import store from "../../utils/store";
+
+test("Logo should load on Rendering Header", () => {
+  const header = render(
+    <Provider store={store}>
+      <Header />
+    </Provider>
+  );
+});
+```
+
+12)Create a dummy function for fetch
+global.fetch = jest.fn()
+
+13)Install testing liabrary Jest Dom
+
+```javascript
+npm i -D @testing-library/jest-dom
+```

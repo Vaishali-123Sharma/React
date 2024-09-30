@@ -21,8 +21,7 @@ const Body = () => {
 
   async function getRestaurants() {
     const data = await fetch(
-      "https://www.swiggy.com/dapi/restaurants/list/v5?lat=21.99740&lng=79.00110&collection=83631"
-      //"https://www.swiggy.com/dapi/restaurants/list/v5?lat=12.9351929&lng=77.62448069999999&page_type=DESKTOP_WEB_LISTING"
+      "https://www.swiggy.com/dapi/restaurants/list/v5?lat=12.9351929&lng=77.62448069999999&page_type=DESKTOP_WEB_LISTING"
     );
     const json = await data.json();
     console.log(json);
@@ -47,6 +46,7 @@ const Body = () => {
     <>
       <div className="search-container p-5 bg-pink-50 my-2">
         <input
+          data-testid="search-input"
           type="text"
           className="p-2 m-2"
           placeholder="Search"
@@ -56,6 +56,7 @@ const Body = () => {
           }}
         />
         <button
+          data-testid="search-btn"
           className="p-2 m-2 bg-purple-900 hover:bg-gray-500 text-white rounded-md"
           onClick={() => {
             const data = filterData(searchText, allRestaurants);
@@ -86,7 +87,7 @@ const Body = () => {
         ></input>
       </div>
 
-      <div className="flex flex-wrap">
+      <div className="flex flex-wrap" data-testid="res-list">
         {/* You have to write logic for NO restraunt fount here */}
         {filteredRestaurants.map((restaurant) => {
           return (

@@ -3,14 +3,11 @@ import { useState, useContext } from "react";
 import UserContext from "../utils/userContext";
 import useOnline from "../utils/useOnline";
 import { useSelector } from "react-redux";
+import Logo from "../assets/img/foodVilla.jpg";
 
 export const Title = () => (
   <a href="/">
-    <img
-      className="h-28 p-2"
-      alt="logo"
-      src="https://yt3.ggpht.com/ytc/AMLnZu_EC-ECXAxRAixWGEfMsE1rdSoetBHyxmLNdtCB=s900-c-k-c0x00ffffff-no-rj"
-    />
+    <img data-testid="logo" className="h-28 p-2" alt="logo" src={Logo} />
   </a>
 );
 
@@ -38,11 +35,13 @@ const Header = () => {
             <li className="px-2">Instamart</li>
           </Link>
           <Link to="/cart">
-            <li className="px-2">Cart-{cartItems.length}</li>
+            <li className="px-2" data-testid="cart">
+              Cart- {cartItems.length}
+            </li>
           </Link>
         </ul>
       </div>
-      <h1>{isOnline ? "✅" : "🔴"}</h1>
+      <h1 data-testid="online-status">{isOnline ? "✅" : "🔴"}</h1>
       <span className="p-10 font-bold text-red-900">{user.name}</span>
       {isLoggedIn ? (
         <button onClick={() => setIsLoggedIn(false)}>Logout</button>
